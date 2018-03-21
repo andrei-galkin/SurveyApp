@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { Http, Response } from '@angular/http'; 
+import { NgForm } from '@angular/forms';
 
 @Component({
     selector: 'survey',
@@ -14,8 +15,8 @@ export class SurveyComponent {
         }, error => console.error(error));
     }
 
-    onSubmit(form: any): void {
-        console.log('you submitted value:', form);
+    submit(value: any) {
+        console.log(value);
     }
 }
 

@@ -4,31 +4,31 @@
 
 <p *ngIf="!questions"><em>Loading...</em></p>
 
-<form #f="ngForm"  
-        (ngSubmit)="onSubmit(f.value)" >
-        <div *ngIf="questions">
-            <p *ngFor="let question of questions">
-                {{ question.id }}. {{question.text}} <br />
-                <span *ngFor="let opt of question.options">
+<form #form="ngForm" (ngSubmit)="submit(form.value)">
 
-                    <div *ngIf="(question.type == 1)">
-                        <div class="radio">
-                            <label><input type="radio" value="{{opt}}" id="q1" name="q_">{{opt}}</label>
-                        </div>
-                    </div>
-                    <div *ngIf="(question.type == 2)">
-                        <div class="checkbox">
-                            <label><input type="checkbox" value="" name="q_d">{{opt}}</label>
-                        </div>
-                    </div>
-                    <div *ngIf="(question.type == 3)">
-                        <div class="textarea">
-                            <textarea class="form-control" rows="5" id="comment"></textarea>
-                        </div>
-                    </div>
-                </span>
+    <div *ngIf="questions">
+        <p *ngFor="let question of questions">
+            {{ question.id }}. {{question.text}} <br />
+            <span *ngFor="let opt of question.options">
 
-            </p>
-        </div>
-        <button type="submit">Submit</button>
-    </form>
+                <div *ngIf="(question.type == 1)">
+                    <label>{{opt}} </label>
+                    <input type="radio" value="{{opt}}" id="q_{{ question.id }}" name="q_{{ question.id }}" ngModel>
+                </div>
+                <div *ngIf="(question.type == 2)">
+                    <label>{{opt}} </label>
+                    <input type="checkbox" id="q_{{ question.id }}" name="q_{{ question.id }}" ngModel>
+                </div>
+                <div *ngIf="(question.type == 3)">
+                    <div class="textarea">
+                        <textarea class="form-control" rows="5" id="q_{{ question.id }}" name="q_{{ question.id }}" ngModel></textarea>
+                    </div>
+                </div>
+            </span>
+
+        </p>
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
+
