@@ -22,13 +22,14 @@ namespace DataManagement
 
         public IEnumerable<Question> GetQuestions()
         {
-            return _surveyDataAccess.GetQuestions().Select(q => new Question()
-            {
-                Id = q.Id,
-                Text = q.Text,
-                Type = q.Type,
-                Options = _questionOptionsDataAccess.GetQuestionOptions(q.Id).ToList()
-            });
+            //return _surveyDataAccess.GetQuestions().Select(q => new Question()
+            //{
+            //    Id = q.Id,
+            //    Text = q.Text,
+            //    Type = q.Type,
+            //    Options = _questionOptionsDataAccess.GetQuestionOptions(q.Id).ToList()
+            //});
+            return SurveyMock.Data();
         }
     }
 }

@@ -19,7 +19,7 @@
                     <label>{{opt}} </label>
                     <input type="checkbox" id="q_{{ question.id }}" name="q_{{ question.id }}" ngModel>
                 </div>
-                <div *ngIf="(question.type == 3)">
+                <div *ngIf="(question.type == 3)">                    
                     <div class="textarea">
                         <textarea class="form-control" rows="5" id="q_{{ question.id }}" name="q_{{ question.id }}" ngModel></textarea>
                     </div>
