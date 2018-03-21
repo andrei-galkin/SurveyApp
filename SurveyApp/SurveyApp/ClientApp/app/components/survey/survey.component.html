@@ -1,0 +1,34 @@
+<h1>Customer Satisfaction Survey</h1>
+
+<p>Please unswer the survey.</p>
+
+<p *ngIf="!questions"><em>Loading...</em></p>
+
+<form #f="ngForm"  
+        (ngSubmit)="onSubmit(f.value)" >
+        <div *ngIf="questions">
+            <p *ngFor="let question of questions">
+                {{ question.id }}. {{question.text}} <br />
+                <span *ngFor="let opt of question.options">
+
+                    <div *ngIf="(question.type == 1)">
+                        <div class="radio">
+                            <label><input type="radio" value="{{opt}}" id="q1" name="q_">{{opt}}</label>
+                        </div>
+                    </div>
+                    <div *ngIf="(question.type == 2)">
+                        <div class="checkbox">
+                            <label><input type="checkbox" value="" name="q_d">{{opt}}</label>
+                        </div>
+                    </div>
+                    <div *ngIf="(question.type == 3)">
+                        <div class="textarea">
+                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                        </div>
+                    </div>
+                </span>
+
+            </p>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
