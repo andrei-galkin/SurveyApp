@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http'; 
 import { NgForm } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
+import { query } from '@angular/animations/src/animation_metadata';
 
 @Component({
     selector: 'survey',
@@ -15,48 +17,27 @@ export class SurveyComponent {
         }, error => console.error(error));
     }
 
-    submit(value: any, @Inject('BASE_URL') baseUrl: string) {
-        console.log(value);
-
-        //let headers = { headers: new Headers({ 'Content-Type': 'application/json' }) };
-
-        //this.http.post(baseUrl + 'api/SurveyData/SaveQuestions', JSON.stringify(value));
-
-        var headers = new Headers({ 'Content-Type': 'application/json' });
+    submit(value: any) {        
+        var headers = new Headers(
+            { 'Accept': 'application/json;', 'Content-Type': 'application/json; charset = utf-8' }
+        );
         var options = new RequestOptions({ headers: headers, });
-        
-        this.http.post(baseUrl + 'api/SurveyData/SaveQuestions', JSON.stringify(value), options)
+        var json = JSON.stringify(value).replace('"', '\"');
+        console.log(json);
+
+        this.http.post('api/SurveyData/SaveAnswer', json, options)
             .subscribe(
             (err) => {
                 if (err) console.log(err);
                 console.log("Success");
-            });
-
-        this.http.post(baseUrl + 'api/SurveyData/SaveContact', JSON.stringify(value), options)
-            .subscribe(
-            (err) => {
-                if (err) console.log(err);
-                console.log("Success");
-            });
-
-        
-
-        //const req = this.http.post(baseUrl + 'api/SurveyData/SaveQuestions', {
-        //    body: value
-        //})
-        //    .subscribe(
-        //    res => {
-        //        console.log(res);
-        //    },
-        //    err => {
-        //        console.log("Error occured");
-        //    }
-        //);
+                this.questions = [];
+            });        
     }
 }
 
 interface Question {
-    id: number;
+    index: number;
+    id: string;
     type: number;
     text: string;
     options: string[]

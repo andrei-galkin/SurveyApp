@@ -7,11 +7,12 @@ using Dapper;
 
 namespace DataAccess
 {
-    public interface ISurveyDataAccess<T>
+    public interface ISurveyDataAccess<Q, A>
     {
-        IEnumerable<T> GetQuestions();
+        IEnumerable<Q> GetQuestions();
+        void SaveAnswer(A answer);
     }
-    public class SurveyDataAccess : ISurveyDataAccess<QuestionDto>, IDisposable
+    public class SurveyDataAccess : ISurveyDataAccess<QuestionDto, AnswerDto>, IDisposable
     {
         private readonly IDbConnection _db;
 
@@ -36,8 +37,13 @@ namespace DataAccess
                                                                   ,[question_type]
                                                                   ,[data]
                                                               FROM [dbo].[SurveyQuestionsInfo]
-                                                              WHERE [question_id] = {0}", questionId)).ToList();
+                                                              WHERE [question_id] = @questionId", questionId)).ToList();
             return list;
+        }
+
+        public void SaveAnswer(AnswerDto answer)
+        {
+            _db.Execute(@"INSERT INTO [SurveyAnswers] ([question_id], [data], [user_data]) VALUES (@Id, @Data, @UserData)", answer);
         }
 
         public void Dispose()

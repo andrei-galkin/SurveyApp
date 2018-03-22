@@ -1,34 +1,33 @@
 <h1>Customer Satisfaction Survey</h1>
 
-<p>Please unswer the survey.</p>
-
-<p *ngIf="!questions"><em>Loading...</em></p>
+<h2 *ngIf="!questions"><em>Loading...</em></h2>
+<h2 *ngIf="questions.length == 0">Saved</h2>
 
 <form #form="ngForm" (ngSubmit)="submit(form.value)">
 
     <div *ngIf="questions">
         <p *ngFor="let question of questions">
-            {{ question.id }}. {{question.text}} <br />
+            {{ question.index }}. {{question.text}} <br />
             <span *ngFor="let opt of question.options">
 
                 <div *ngIf="(question.type == 1)">
                     <label>{{opt}} </label>
-                    <input type="radio" value="{{opt}}" id="q_{{ question.id }}" name="q_{{ question.id }}" ngModel>
+                    <input type="radio" value="{{opt}}" id="{{ question.id }}" name="{{ question.id }}" ngModel>
                 </div>
-                <div *ngIf="(question.type == 2)">
+                <div *ngIf="(question.type == 2)">                    
                     <label>{{opt}} </label>
-                    <input type="checkbox" id="q_{{ question.id }}" name="q_{{ question.id }}" ngModel>
+                    <input type="checkbox" id="{{ question.id }}_{{opt}}" name="{{ question.id }}_{{opt}}" ngModel>
                 </div>
-                <div *ngIf="(question.type == 3)">                    
+                <div *ngIf="(question.type == 3)">
                     <div class="textarea">
-                        <textarea class="form-control" rows="5" id="q_{{ question.id }}" name="q_{{ question.id }}" ngModel></textarea>
+                        <textarea class="form-control" rows="5" id="{{ question.id }}" name="{{ question.id }}" ngModel></textarea>
                     </div>
                 </div>
             </span>
 
         </p>
     </div>
-
-    <button type="submit">Submit</button>
+    
+    <button *ngIf="questions.length > 0" type="submit">Submit</button>
 </form>
 

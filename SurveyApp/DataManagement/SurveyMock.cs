@@ -12,21 +12,21 @@ namespace DataManagement
             {
                 new Question()
                 {
-                    Id = 1,
+                    Id = "q_1",
                     Type = 1,
                     Text = "Question 1",
                     Options = new List<string>() { "R1", "R2", "R3" }
                 },
                 new Question()
                 {
-                    Id = 2,
+                    Id = "q_2",
                     Type = 2,
                     Text = "Question 2",
                     Options = new List<string>() { "C1", "C2", "C3" }
                 },
                 new Question()
                 {
-                    Id = 3,
+                    Id = "q_3",
                     Type = 3,
                     Text = "Question 3",
                     Options = new List<string>(){""}
