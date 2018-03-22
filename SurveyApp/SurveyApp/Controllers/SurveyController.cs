@@ -39,7 +39,7 @@ namespace SurveyApp.Controllers
                     Index = q.Index,
                     Text = q.Text,
                     Type = q.Type,
-                    Options = q.Options
+                    Options = q.Options.ToList()
                 });
             }
             catch (Exception ex)

@@ -1,3 +1,20 @@
 <h1>Customer Satisfaction Statistic</h1>
 
 <p>Statistic:</p>
+
+<p *ngIf="!stats"><em>Loading...</em></p>
+
+<table class='table' *ngIf="stats">
+    <thead>
+        <tr>
+            <th>Question</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let stat of stats">
+            <td>{{ stat.text }}</td>
+            <td>{{ stat.type }}</td>
+        </tr>
+    </tbody>
+</table>

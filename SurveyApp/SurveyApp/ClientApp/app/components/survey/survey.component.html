@@ -7,27 +7,28 @@
 
     <div *ngIf="questions">
         <p *ngFor="let question of questions">
-            {{ question.index }}. {{question.text}} <br />
-            <span *ngFor="let opt of question.options">
+            <label>{{ question.index }}. {{question.text}}</label><br />
+                <span *ngFor="let opt of question.options">
 
-                <div *ngIf="(question.type == 1)">
-                    <label>{{opt}} </label>
-                    <input type="radio" value="{{opt}}" id="{{ question.id }}" name="{{ question.id }}" ngModel>
-                </div>
-                <div *ngIf="(question.type == 2)">                    
-                    <label>{{opt}} </label>
-                    <input type="checkbox" id="{{ question.id }}_{{opt}}" name="{{ question.id }}_{{opt}}" ngModel>
-                </div>
-                <div *ngIf="(question.type == 3)">
-                    <div class="textarea">
-                        <textarea class="form-control" rows="5" id="{{ question.id }}" name="{{ question.id }}" ngModel></textarea>
+                    <div *ngIf="(question.type == 1)">
+                        <p>{{opt}} <input type="radio" value="{{opt}}" id="{{ question.id }}" name="{{ question.id }}" ngModel></p>
                     </div>
-                </div>
-            </span>
+                    <div *ngIf="(question.type == 2)">
+                        <p>{{opt}} <input type="checkbox" id="{{ question.id }}_{{opt}}" name="{{ question.id }}_{{opt}}" ngModel></p>
+                        
+                    </div>
+                    <div *ngIf="(question.type == 3)">
+                        <div class="textarea">
+                            <textarea class="form-control" rows="5" id="{{ question.id }}" name="{{ question.id }}" ngModel></textarea>
+                        </div>
+                    </div>
+                </span>
 
-        </p>
+</p>
     </div>
+                    
+    <button *ngIf="questions.length > 0" type="submit" class="btn btn-primary btn-block btn-md"> Submit </button>
     
-    <button *ngIf="questions.length > 0" type="submit">Submit</button>
 </form>
+<span>&nbsp;</span>
 
