@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataManagement;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SurveyApp.Model;
 
@@ -28,11 +27,13 @@ namespace SurveyApp.Controllers
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<QuestionModel> GetQuestions()
+        public async Task<IEnumerable<QuestionModel>> GetQuestions()
         {
             try
             {
-                return _surveyDataManager.GetQuestions().Select(q => new QuestionModel()
+                var list = await _surveyDataManager.GetQuestionsAsync().ConfigureAwait(false);
+
+                return list.Select(q => new QuestionModel()
                 {
                     Id = q.Id,
                     Index = q.Index,
@@ -50,17 +51,19 @@ namespace SurveyApp.Controllers
 
         [Produces("application/json")]
         [HttpPost("[action]")]
-        public IActionResult SaveAnswer([FromBody]JObject json)
+        public async Task<IActionResult> SaveAnswer([FromBody]JObject json)
         {
             try
             {
                 var answer = new Answer();
+                answer.UserData = Request.Host.Host;
+
                 foreach (KeyValuePair<string, JToken> pair in json)
                 {
                     answer.Answers.Add(pair.Key, json.GetValue(pair.Key).ToString());
                 }
 
-                _surveyDataManager.SaveAnswer(answer);
+                await _surveyDataManager.SaveAnswerAsync(answer).ConfigureAwait(false);
                 OkResult result = Ok();
                 return result;
             }

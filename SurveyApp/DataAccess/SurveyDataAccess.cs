@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 using Dapper;
 
 namespace DataAccess
 {
     public interface ISurveyDataAccess<Q, A>
     {
-        IEnumerable<Q> GetQuestions();
-        void SaveAnswer(A answer);
+        Task<IEnumerable<Q>> GetQuestions();
+        Task SaveAnswerAsync(A answer);
     }
     public class SurveyDataAccess : ISurveyDataAccess<QuestionDto, AnswerDto>, IDisposable
     {
@@ -21,12 +22,12 @@ namespace DataAccess
             _db = new SqlConnection(ConfigProvider.DbConnectionString());
         }
 
-        public IEnumerable<QuestionDto> GetQuestions()
+        public async Task<IEnumerable<QuestionDto>> GetQuestions()
         {
-            var list = _db.Query<QuestionDto>(@"SELECT [id]
+            var list = await _db.QueryAsync<QuestionDto>(@"SELECT [id]
                                                       ,[text]
                                                       ,[question_type] AS type
-                                                  FROM [dbo].[SurveyQuestions]").ToList();
+                                                  FROM [dbo].[SurveyQuestions]").ConfigureAwait(false);
             return list;
         }
 
@@ -41,9 +42,10 @@ namespace DataAccess
             return list;
         }
 
-        public void SaveAnswer(AnswerDto answer)
+        public async Task SaveAnswerAsync(AnswerDto answer)
         {
-            _db.Execute(@"INSERT INTO [SurveyAnswers] ([question_id], [data], [user_data]) VALUES (@Id, @Data, @UserData)", answer);
+            await _db.ExecuteAsync(@"INSERT INTO [SurveyAnswers] ([question_id], [data], [user_data]) 
+                                     VALUES (@Id, @Data, @UserData)", answer).ConfigureAwait(false);
         }
 
         public void Dispose()

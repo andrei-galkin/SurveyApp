@@ -1,15 +1,15 @@
 ﻿using DataAccess;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DataManagement
 {
     public interface ISurveyDataManager<Q, A>
     {
-        IEnumerable<Q> GetQuestions();
-        void SaveAnswer(A answer);
+        Task<IEnumerable<Q>> GetQuestionsAsync();
+        Task SaveAnswerAsync(A answer);
     }
 
     public class SurveyDataManager : ISurveyDataManager<Question, Answer>
@@ -23,9 +23,10 @@ namespace DataManagement
             _questionOptionsDataAccess = new QuestionOptionsDataAccess();
         }
 
-        public IEnumerable<Question> GetQuestions()
+        public async Task<IEnumerable<Question>> GetQuestionsAsync()
         {
-            var questions = _surveyDataAccess.GetQuestions().Select((q, index) => new Question()
+            var list = await _surveyDataAccess.GetQuestions().ConfigureAwait(false);
+            var questions = list.Select((q, index) => new Question()
             {
                 Id = BuildQuestionId(q.Id),
                 Index = index + 1,
@@ -38,7 +39,7 @@ namespace DataManagement
             //return SurveyMock.Data();
         }
 
-        public void SaveAnswer(Answer answer)
+        public async Task SaveAnswerAsync(Answer answer)
         {
             try
             {
@@ -54,10 +55,10 @@ namespace DataManagement
                     {
                         Id = questionId,
                         Data = questionValue,
-                        UserData = ""
+                        UserData = answer.UserData
                     };
 
-                    _surveyDataAccess.SaveAnswer(answerDto);
+                    await _surveyDataAccess.SaveAnswerAsync(answerDto).ConfigureAwait(false);
                 }
             }
             catch(Exception ex)
