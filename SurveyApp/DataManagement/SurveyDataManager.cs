@@ -25,18 +25,18 @@ namespace DataManagement
 
         public async Task<IEnumerable<Question>> GetQuestionsAsync()
         {
-            var list = await _surveyDataAccess.GetQuestions().ConfigureAwait(false);
-            var questions = list.Select((q, index) => new Question()
-            {
-                Id = BuildQuestionId(q.Id),
-                Index = index + 1,
-                Text = q.Text,
-                Type = q.Type,
-                Options = _questionOptionsDataAccess.GetQuestionOptions(q.Id).ToList()
-            });
+            //var list = await _surveyDataAccess.GetQuestions().ConfigureAwait(false);
+            //var questions = list.Select((q, index) => new Question()
+            //{
+            //    Id = BuildQuestionId(q.Id),
+            //    Index = index + 1,
+            //    Text = q.Text,
+            //    Type = q.Type,
+            //    Options = _questionOptionsDataAccess.GetQuestionOptions(q.Id).ToList()
+            //});
 
-            return questions;
-            //return SurveyMock.Data();
+            //return questions;
+            return SurveyMock.Data();
         }
 
         public async Task SaveAnswerAsync(Answer answer)
