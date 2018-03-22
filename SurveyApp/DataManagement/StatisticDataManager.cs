@@ -20,7 +20,7 @@ namespace DataManagement
 
         public async Task<IDictionary<int, Stat>> GetDataAsync()
         {
-            var list = await _statisticDataAccess.GetDataAsync().ConfigureAwait(false);
+            var list = SurveyDataMock.GetDataStats(); //await _statisticDataAccess.GetDataAsync().ConfigureAwait(false);
             var statList = new Dictionary<int, Stat>();
 
             foreach(var s in list)

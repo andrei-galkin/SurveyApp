@@ -6,7 +6,7 @@ namespace DataManagement
 {
     public class SurveyMock
     {
-        public static IEnumerable<Question>  Data()
+        public static IEnumerable<Question>  GetData()
         {
             var list = new List<Question>
             {
@@ -34,6 +34,6 @@ namespace DataManagement
             };
 
             return list;
-        }
+        }       
     }
 }

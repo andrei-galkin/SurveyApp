@@ -36,7 +36,7 @@ namespace DataManagement
             //});
 
             //return questions;
-            return SurveyMock.Data();
+            return SurveyMock.GetData();
         }
 
         public async Task SaveAnswerAsync(Answer answer)

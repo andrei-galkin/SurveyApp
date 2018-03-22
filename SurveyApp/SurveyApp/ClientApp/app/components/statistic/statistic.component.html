@@ -1,9 +1,6 @@
 <h1>Customer Satisfaction Statistic</h1>
-
 <p>Statistic:</p>
-
 <p *ngIf="!stats"><em>Loading...</em></p>
-
 <table class='table' *ngIf="stats">
     <thead>
         <tr>
@@ -18,3 +15,29 @@
         </tr>
     </tbody>
 </table>
+<div *ngIf="stats">
+    <p *ngFor="let stat of stats">
+        <label>{{ stat.text }}. {{stat.type}}</label><br />
+
+        <span *ngFor="let result of stat.results">
+
+            <div style="display: block">
+                <canvas baseChart
+                        [data]="result"
+                        [labels]="result"
+                        [chartType]="doughnutChartType"></canvas>
+            </div>
+        </span>
+    </p>
+</div>
+
+<div style="display: block">
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+</div>
