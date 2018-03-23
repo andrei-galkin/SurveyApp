@@ -12,6 +12,6 @@ andron.galkin@gmail.com
 
 # App
 
-![Screenshot1](1.png)
-![Screenshot2](2.png)
-![Screenshot3](3.png)
+![Screenshot1](../master/Pic/1.png)
+![Screenshot2](../master/Pic/2.png)
+![Screenshot3](../master/Pic/3.png)
