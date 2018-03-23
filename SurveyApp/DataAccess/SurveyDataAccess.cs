@@ -11,9 +11,9 @@ namespace DataAccess
     public interface ISurveyDataAccess<Q, A>
     {
         Task<IEnumerable<Q>> GetQuestions();
-        Task SaveAnswerAsync(A answer);
+        Task SaveAnswerAsync(A response);
     }
-    public class SurveyDataAccess : ISurveyDataAccess<QuestionDto, AnswerDto>, IDisposable
+    public class SurveyDataAccess : ISurveyDataAccess<QuestionDto, ResponserDto>, IDisposable
     {
         private readonly IDbConnection _db;
 
@@ -42,10 +42,10 @@ namespace DataAccess
             return list;
         }
 
-        public async Task SaveAnswerAsync(AnswerDto answer)
+        public async Task SaveAnswerAsync(ResponserDto response)
         {
             await _db.ExecuteAsync(@"INSERT INTO [SurveyAnswers] ([question_id], [data], [user_data]) 
-                                     VALUES (@Id, @Data, @UserData)", answer).ConfigureAwait(false);
+                                     VALUES (@Id, @Data, @UserData)", response).ConfigureAwait(false);
         }
 
         public void Dispose()

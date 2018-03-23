@@ -1,34 +1,37 @@
 <h1>Customer Satisfaction Survey</h1>
 
 <h2 *ngIf="!questions"><em>Loading...</em></h2>
-<h2 *ngIf="!questions">Saved</h2>
+<h2 *ngIf="saved">Saved</h2>
 
 <form #form="ngForm" (ngSubmit)="submit(form.value)">
 
     <div *ngIf="questions">
-        <p *ngFor="let question of questions">
-            <label>{{ question.index }}. {{question.text}}</label><br />
-                <span *ngFor="let opt of question.options">
+        <p *ngFor="let question of questions" style="display: block;">
 
-                    <div *ngIf="(question.type == 1)">
-                        <p>{{opt}} <input type="radio" value="{{opt}}" id="{{ question.id }}" name="{{ question.id }}" ngModel></p>
+            <label>{{ question.index }}. {{question.text}}</label>
+            <span *ngFor="let opt of question.options">
+                <div *ngIf="(question.type == 1)">
+                    <span><input type="radio" value="{{opt}}" id="{{ question.id }}" name="{{ question.id }}" ngModel> {{opt}} </span>
+                </div>
+                <div *ngIf="(question.type == 2)">
+                    <span style="float: left; margin-right: 1em;"> <input type="checkbox" id="{{ question.id }}_{{opt}}" name="{{ question.id }}_{{opt}}" ngModel> {{opt}} </span>
+                </div>
+                <div *ngIf="(question.type == 3)">
+                    <div class="textarea">
+                        <textarea class="form-control" rows="5" id="{{ question.id }}" name="{{ question.id }}" ngModel></textarea>
                     </div>
-                    <div *ngIf="(question.type == 2)">
-                        <p>{{opt}} <input type="checkbox" id="{{ question.id }}_{{opt}}" name="{{ question.id }}_{{opt}}" ngModel></p>
-                        
-                    </div>
-                    <div *ngIf="(question.type == 3)">
-                        <div class="textarea">
-                            <textarea class="form-control" rows="5" id="{{ question.id }}" name="{{ question.id }}" ngModel></textarea>
-                        </div>
-                    </div>
-                </span>
-
+                </div>
+                <div *ngIf="(question.type == 4)">
+                    <span style="float: left; margin-right: 2em;"><input type="radio" value="{{opt}}" id="{{ question.id }}" name="{{ question.id }}" ngModel> {{opt}}</span>
+                </div>
+            </span>
+            &nbsp;
         </p>
+        <br/>
     </div>
-                    
+
     <button *ngIf="questions.length > 0" type="submit" class="btn btn-primary btn-block btn-md"> Submit </button>
-    
+
 </form>
 <span>&nbsp;</span>
 

@@ -12,9 +12,9 @@ namespace DataManagement
         Task SaveAnswerAsync(A answer);
     }
 
-    public class SurveyDataManager : ISurveyDataManager<Question, Answer>
+    public class SurveyDataManager : ISurveyDataManager<Question, ResponseItem>
     {
-        private readonly ISurveyDataAccess<QuestionDto, AnswerDto> _surveyDataAccess;
+        private readonly ISurveyDataAccess<QuestionDto, ResponserDto> _surveyDataAccess;
         private readonly IQuestionOptionsDataAccess<string> _questionOptionsDataAccess;
 
         public SurveyDataManager()
@@ -25,25 +25,24 @@ namespace DataManagement
 
         public async Task<IEnumerable<Question>> GetQuestionsAsync()
         {
-            //var list = await _surveyDataAccess.GetQuestions().ConfigureAwait(false);
-            //var questions = list.Select((q, index) => new Question()
-            //{
-            //    Id = BuildQuestionId(q.Id),
-            //    Index = index + 1,
-            //    Text = q.Text,
-            //    Type = q.Type,
-            //    Options = _questionOptionsDataAccess.GetQuestionOptions(q.Id).ToList()
-            //});
+            var list = await _surveyDataAccess.GetQuestions().ConfigureAwait(false);
+            var questions = list.Select((q, index) => new Question()
+            {
+                Id = BuildQuestionId(q.Id),
+                Index = index + 1,
+                Text = q.Text,
+                Type = q.Type,
+                Options = _questionOptionsDataAccess.GetQuestionOptions(q.Id).ToList()
+            });
 
-            //return questions;
-            return SurveyMock.GetData();
+            return questions;
         }
 
-        public async Task SaveAnswerAsync(Answer answer)
+        public async Task SaveAnswerAsync(ResponseItem item)
         {
             try
             {
-                foreach (var a in answer.Answers)
+                foreach (var a in item.Responses)
                 {
                     string[] keyList = a.Key.Split('_');
 
@@ -51,11 +50,11 @@ namespace DataManagement
                     int questionId = Convert.ToInt32(keyList[1]);
                     string questionValue = keyList.Length > 2 ? keyList[2] : a.Value;
 
-                    var answerDto = new AnswerDto()
+                    var answerDto = new ResponserDto()
                     {
                         Id = questionId,
                         Data = questionValue,
-                        UserData = answer.UserData
+                        UserData = item.UserData
                     };
 
                     await _surveyDataAccess.SaveAnswerAsync(answerDto).ConfigureAwait(false);

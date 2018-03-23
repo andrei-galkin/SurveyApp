@@ -10,6 +10,7 @@ import { query } from '@angular/animations/src/animation_metadata';
 })
 export class SurveyComponent {
     public questions: Question[];
+    public saved: boolean;
 
     constructor(private http: Http, @Inject('BASE_URL') baseUrl: string) {
         http.get(baseUrl + 'api/SurveyData/GetQuestions').subscribe(result => {
@@ -31,6 +32,7 @@ export class SurveyComponent {
                 if (err) console.log(err);
                 console.log("Success");
                 this.questions = [];
+                this.saved = true;
             });        
     }
 }

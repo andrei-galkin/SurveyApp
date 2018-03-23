@@ -12,7 +12,7 @@ namespace SurveyApp.Controllers
     [Route("api/[controller]")]
     public class SurveyDataController : Controller
     {
-        private readonly ISurveyDataManager<Question, Answer> _surveyDataManager;
+        private readonly ISurveyDataManager<Question, ResponseItem> _surveyDataManager;
 
         public SurveyDataController()
         {
@@ -55,12 +55,12 @@ namespace SurveyApp.Controllers
         {
             try
             {
-                var answer = new Answer();
+                var answer = new ResponseItem();
                 answer.UserData = Request.Host.Host;
 
                 foreach (KeyValuePair<string, JToken> pair in json)
                 {
-                    answer.Answers.Add(pair.Key, json.GetValue(pair.Key).ToString());
+                    answer.Responses.Add(pair.Key, json.GetValue(pair.Key).ToString());
                 }
 
                 await _surveyDataManager.SaveAnswerAsync(answer).ConfigureAwait(false);
