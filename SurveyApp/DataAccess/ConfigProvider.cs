@@ -1,13 +1,18 @@
-﻿namespace DataAccess
+﻿using Microsoft.Extensions.Configuration;
+using System.IO;
+
+namespace DataAccess
 {
     public static class ConfigProvider
     {
+        public static IConfiguration Configuration { get; set; }
+
         public static string DbConnectionString()
         {
-            //SurveyApp
-            string connectionString = "Integrated Security=SSPI;Initial Catalog=SurveyApp;Data Source=localhost;";
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
+            Configuration = builder.Build();
 
-            return connectionString;
+            return Configuration.GetConnectionString("DefaultConnection");
         }
     }
 }
