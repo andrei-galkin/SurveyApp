@@ -12,7 +12,7 @@ Build on C#, .NET Core, Angular 4, MS SQL
 6. Hit F5.
 
 # Contribution guidelines
-Any comments are acepted!
+Any comments are accepted!
 
 # Who do I talk to?
 andron.galkin@gmail.com
