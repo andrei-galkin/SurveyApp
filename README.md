@@ -1,6 +1,6 @@
 # SurveyApp
 SurveyApp is small and basic survey application.
-Build on .NET Core, Angular, MS SQL
+Build on C#, .NET Core, Angular 4, MS SQL
 
 # How do I get set up?
 1. Clone repo.
