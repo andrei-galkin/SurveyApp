@@ -21,6 +21,7 @@ export class StatisticComponent {
 interface IQuestion {
     text: string;
     id: number;
+    index: number;
     type: number;
     response: IResponse[];
 }

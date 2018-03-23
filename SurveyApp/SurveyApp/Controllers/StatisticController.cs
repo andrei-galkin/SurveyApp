@@ -31,12 +31,13 @@ namespace StatisticApp.Controllers
             {
                 var list = await _StatisticDataManager.GetDataAsync().ConfigureAwait(false);
 
-                return list.Select(q => new StatModel()
+                return list.Select((i, index)=> new StatModel()
                 {
-                    Id = q.Key,
-                    Text = q.Value.Text,
-                    Type = q.Value.Type,
-                    StatResult = q.Value.StatResult.Select( 
+                    Index = index + 1,
+                    Id = i.Key,
+                    Text = i.Value.Text,
+                    Type = i.Value.Type,
+                    StatResult = i.Value.StatResult.Select( 
                             r => new StatResultModel() {
                                 Count = r.Count,
                                 Text = r.Text

@@ -9,7 +9,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let question of questions">
-            <td>{{ question.text }}</td>
+            <td>{{ question.index }}. {{ question.text }}</td>
             <td>
                 <table class='table' *ngIf="question.statResult">
                     <thead>

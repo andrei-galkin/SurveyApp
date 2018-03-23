@@ -27,7 +27,8 @@ namespace DataAccess
             var list = await _db.QueryAsync<QuestionDto>(@"SELECT id
                                                       ,text
                                                       ,question_type AS type
-                                                  FROM dbo.SurveyQuestions").ConfigureAwait(false);
+                                                  FROM dbo.SurveyQuestions
+                                                  ORDER BY id").ConfigureAwait(false);
             return list;
         }
 
@@ -38,7 +39,8 @@ namespace DataAccess
                                                                   ,question_type
                                                                   ,data
                                                               FROM dbo.SurveyQuestionsInfo
-                                                              WHERE question_id = @questionId", questionId)).ToList();
+                                                              WHERE question_id = @questionId
+                                                              ORDER BY id", questionId)).ToList();
             return list;
         }
 
