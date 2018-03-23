@@ -18,6 +18,11 @@ namespace DataManagement
             _statisticDataAccess = new StatisticDataAccess();
         }
 
+        public StatisticDataManager(IStatisticDataAccess<StatDto> dataAccess)
+        {
+            _statisticDataAccess = dataAccess;
+        }
+
         public async Task<IDictionary<int, Stat>> GetDataAsync()
         {
             var list = await _statisticDataAccess.GetDataAsync().ConfigureAwait(false);

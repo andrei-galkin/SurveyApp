@@ -10,13 +10,13 @@ namespace StatisticApp.Controllers
     [Route("api/[controller]")]
     public class StatisticDataController : Controller
     {
-        private readonly IStatisticDataManager<IDictionary<int, Stat>> _StatisticDataManager;
+        private readonly IStatisticDataManager<IDictionary<int, Stat>> _statisticDataManager;
 
         public StatisticDataController()
         {
             try
             {
-                _StatisticDataManager = new StatisticDataManager();
+                _statisticDataManager = new StatisticDataManager();
             }
             catch (Exception ex)
             {
@@ -29,7 +29,7 @@ namespace StatisticApp.Controllers
         {
             try
             {
-                var list = await _StatisticDataManager.GetDataAsync().ConfigureAwait(false);
+                var list = await _statisticDataManager.GetDataAsync().ConfigureAwait(false);
 
                 return list.Select((i, index)=> new StatModel()
                 {

@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyApp", "SurveyApp\SurveyApp.csproj", "{2CDE5911-CAF4-44D8-9D72-5114DBE321F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyApp", "SurveyApp\SurveyApp.csproj", "{2CDE5911-CAF4-44D8-9D72-5114DBE321F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{D3785EAF-A040-4A9F-BF9F-EBD0B4AB89A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{D3785EAF-A040-4A9F-BF9F-EBD0B4AB89A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManagement", "DataManagement\DataManagement.csproj", "{DEC50CEA-19E1-48DE-9F83-7384F1E15542}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataManagement", "DataManagement\DataManagement.csproj", "{DEC50CEA-19E1-48DE-9F83-7384F1E15542}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManagement.Tests", "DataManagement.Tests\DataManagement.Tests.csproj", "{B9DFAC0D-55F7-42FA-8574-8CCF6EA1D0E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{DEC50CEA-19E1-48DE-9F83-7384F1E15542}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEC50CEA-19E1-48DE-9F83-7384F1E15542}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEC50CEA-19E1-48DE-9F83-7384F1E15542}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9DFAC0D-55F7-42FA-8574-8CCF6EA1D0E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9DFAC0D-55F7-42FA-8574-8CCF6EA1D0E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9DFAC0D-55F7-42FA-8574-8CCF6EA1D0E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9DFAC0D-55F7-42FA-8574-8CCF6EA1D0E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
