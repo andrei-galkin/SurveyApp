@@ -28,7 +28,7 @@ namespace DataAccess
 	                                                      ,b.question_type as type
 	                                                      ,a.data
                                                           ,COUNT(a.data) as count
-                                                      FROM dbo.SurveyAnswers a
+                                                      FROM dbo.SurveyResponses a
                                                       INNER JOIN dbo.SurveyQuestions b ON a.question_id = b.id
                                                       GROUP BY question_id, data, b.text, b.question_type").ConfigureAwait(false);
             return list;

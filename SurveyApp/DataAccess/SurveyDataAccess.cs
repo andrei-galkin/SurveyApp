@@ -24,27 +24,27 @@ namespace DataAccess
 
         public async Task<IEnumerable<QuestionDto>> GetQuestions()
         {
-            var list = await _db.QueryAsync<QuestionDto>(@"SELECT [id]
-                                                      ,[text]
-                                                      ,[question_type] AS type
-                                                  FROM [dbo].[SurveyQuestions]").ConfigureAwait(false);
+            var list = await _db.QueryAsync<QuestionDto>(@"SELECT id
+                                                      ,text
+                                                      ,question_type AS type
+                                                  FROM dbo.SurveyQuestions").ConfigureAwait(false);
             return list;
         }
 
         public IEnumerable<string> GetQuestionOptions(int questionId)
         {
-            var list = _db.Query<string>(string.Format(@"SELECT [id]
-                                                                  ,[question_id]
-                                                                  ,[question_type]
-                                                                  ,[data]
-                                                              FROM [dbo].[SurveyQuestionsInfo]
-                                                              WHERE [question_id] = @questionId", questionId)).ToList();
+            var list = _db.Query<string>(string.Format(@"SELECT id
+                                                                  ,question_id
+                                                                  ,question_type
+                                                                  ,data
+                                                              FROM dbo.SurveyQuestionsInfo
+                                                              WHERE question_id = @questionId", questionId)).ToList();
             return list;
         }
 
         public async Task SaveAnswerAsync(ResponserDto response)
         {
-            await _db.ExecuteAsync(@"INSERT INTO [SurveyAnswers] ([question_id], [data], [user_data]) 
+            await _db.ExecuteAsync(@"INSERT INTO SurveyResponses (question_id, data, user_data) 
                                      VALUES (@Id, @Data, @UserData)", response).ConfigureAwait(false);
         }
 

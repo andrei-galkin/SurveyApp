@@ -29,7 +29,9 @@ export class SurveyComponent {
         this.http.post('api/SurveyData/SaveAnswer', json, options)
             .subscribe(
             (err) => {
-                if (err) console.log(err);
+                if (err) {
+                    console.log(err);
+                }
                 console.log("Success");
                 this.questions = [];
                 this.saved = true;

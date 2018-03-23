@@ -60,7 +60,11 @@ namespace SurveyApp.Controllers
 
                 foreach (KeyValuePair<string, JToken> pair in json)
                 {
-                    answer.Responses.Add(pair.Key, json.GetValue(pair.Key).ToString());
+                    string value = json.GetValue(pair.Key).ToString().Trim();
+                    if (value != string.Empty)
+                    {
+                        answer.Responses.Add(pair.Key, value);
+                    }
                 }
 
                 await _surveyDataManager.SaveAnswerAsync(answer).ConfigureAwait(false);
