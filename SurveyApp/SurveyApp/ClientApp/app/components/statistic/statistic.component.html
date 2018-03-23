@@ -1,43 +1,31 @@
 <h1>Customer Satisfaction Statistic</h1>
-<p>Statistic:</p>
-<p *ngIf="!stats"><em>Loading...</em></p>
-<table class='table' *ngIf="stats">
+<p *ngIf="!questions"><em>Loading...</em></p>
+<table class='table' *ngIf="questions">
     <thead>
         <tr>
             <th>Question</th>
-            <th>Type</th>
+            <th>Stats</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let stat of stats">
-            <td>{{ stat.text }}</td>
-            <td>{{ stat.type }}</td>
+        <tr *ngFor="let question of questions">
+            <td>{{ question.text }}</td>
+            <td>
+                <table class='table' *ngIf="question.statResult">
+                    <thead>
+                        <tr>
+                            <th>Response</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of question.statResult">
+                            <td>{{ item.text }}</td>
+                            <td>{{item.count}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
         </tr>
     </tbody>
 </table>
-<div *ngIf="stats">
-    <p *ngFor="let stat of stats">
-        <label>{{ stat.text }}. {{stat.type}}</label><br />
-
-        <span *ngFor="let result of stat.results">
-
-            <div style="display: block">
-                <canvas baseChart
-                        [data]="result"
-                        [labels]="result"
-                        [chartType]="doughnutChartType"></canvas>
-            </div>
-        </span>
-    </p>
-</div>
-
-<div style="display: block">
-    <canvas baseChart
-            [datasets]="barChartData"
-            [labels]="barChartLabels"
-            [options]="barChartOptions"
-            [legend]="barChartLegend"
-            [chartType]="barChartType"
-            (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"></canvas>
-</div>
