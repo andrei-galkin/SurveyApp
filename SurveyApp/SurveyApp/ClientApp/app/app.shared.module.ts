@@ -10,6 +10,7 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { SurveyComponent } from './components/survey/survey.component';
 import { StatisticComponent } from './components/statistic/statistic.component';
+import { StatchartComponent } from './components/statistic/statchart.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { StatisticComponent } from './components/statistic/statistic.component';
         NavMenuComponent,
         HomeComponent,
         SurveyComponent,
-        StatisticComponent
+        StatisticComponent,
+        StatchartComponent
     ],
     imports: [
         CommonModule,
@@ -30,6 +32,7 @@ import { StatisticComponent } from './components/statistic/statistic.component';
             { path: 'home', component: HomeComponent },
             { path: 'survey', component: SurveyComponent },
             { path: 'statistic', component: StatisticComponent },
+            { path: 'statchart', component: StatchartComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

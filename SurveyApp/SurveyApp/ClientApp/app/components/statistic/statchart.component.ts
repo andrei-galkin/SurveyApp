@@ -21,4 +21,8 @@ export class StatchartComponent {
     public chartHovered(e: any): void {
         console.log(e);
     }
+
+    setData() {
+        this.doughnutChartLabels = ['Test 1', 'Test 2', 'Test 3'];
+    }
 }

@@ -9,6 +9,7 @@ import { StatchartComponent } from './statchart.component';
 })
 export class StatisticComponent {
     public questions: IQuestion[];
+    @ViewChild(StatchartComponent) statchartComponent: StatchartComponent;
 
     constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
         http.get(baseUrl + 'api/StatisticData/GetData').subscribe(result => {
@@ -16,6 +17,17 @@ export class StatisticComponent {
             console.log(this.questions);
 
         }, error => console.error(error));
+    }
+
+    
+
+    ngAfterViewInit() {
+        // After the view is initialized, this.userProfile will be available
+        this.update();
+    }
+
+    update() {
+        this.statchartComponent.setData();
     }
 }
 
