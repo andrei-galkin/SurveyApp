@@ -1,6 +1,7 @@
 import { Component, Inject, OnChanges, SimpleChanges } from '@angular/core';
 import { OnInit, Pipe, ViewChild, ElementRef } from '@angular/core';
 import { Http } from '@angular/http';
+import { StatchartComponent } from './statchart.component';
 
 @Component({
     selector: 'statistic',

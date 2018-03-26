@@ -22,17 +22,19 @@ namespace DataAccess
 
         public async Task<IEnumerable<StatDto>> GetDataAsync()
         {
-            var list = await _db.QueryAsync<StatDto>(@"SELECT
-                                                          a.question_id as id
-	                                                      ,b.text
-	                                                      ,b.question_type as type
-	                                                      ,a.data
-                                                          ,COUNT(a.data) as count
-                                                      FROM dbo.SurveyResponses a
-                                                      INNER JOIN dbo.SurveyQuestions b ON a.question_id = b.id
-                                                      GROUP BY question_id, data, b.text, b.question_type
-                                                      ORDER BY question_id").ConfigureAwait(false);
-            return list;
+            //var list = await _db.QueryAsync<StatDto>(@"SELECT
+            //                                              a.question_id as id
+            //                                           ,b.text
+            //                                           ,b.question_type as type
+            //                                           ,a.data
+            //                                              ,COUNT(a.data) as count
+            //                                          FROM dbo.SurveyResponses a
+            //                                          INNER JOIN dbo.SurveyQuestions b ON a.question_id = b.id
+            //                                          GROUP BY question_id, data, b.text, b.question_type
+            //                                          ORDER BY question_id").ConfigureAwait(false);
+            //return list;
+
+            return SurveyDataMock.GetDataStats();
         }
         
         public void Dispose()

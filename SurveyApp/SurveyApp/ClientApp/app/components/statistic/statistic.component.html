@@ -11,6 +11,7 @@
         <tr *ngFor="let question of questions">
             <td>{{ question.index }}. {{ question.text }}</td>
             <td>
+                <statchart></statchart>
                 <table class='table' *ngIf="question.statResult">
                     <thead>
                         <tr>
