@@ -1,9 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Directive, ElementRef, Renderer2 } from '@angular/core';
 
 @Component({
     selector: 'statchart',
     templateUrl: './statchart.component.html'
 })
+
+    @Directive({ selector: '[statchart]' })
 export class StatchartComponent {
 
     constructor() {        

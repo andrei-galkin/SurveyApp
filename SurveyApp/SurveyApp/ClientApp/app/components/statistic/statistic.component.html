@@ -1,5 +1,6 @@
 <h1>Customer Satisfaction Statistic</h1>
 <p *ngIf="!questions"><em>Loading...</em></p>
+<statchart></statchart>
 <table class='table' *ngIf="questions">
     <thead>
         <tr>
@@ -11,7 +12,7 @@
         <tr *ngFor="let question of questions">
             <td>{{ question.index }}. {{ question.text }}</td>
             <td>
-                <statchart></statchart>
+                
                 <table class='table' *ngIf="question.statResult">
                     <thead>
                         <tr>
