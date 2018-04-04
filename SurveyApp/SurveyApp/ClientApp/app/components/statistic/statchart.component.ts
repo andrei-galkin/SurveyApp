@@ -1,4 +1,4 @@
-import { Component, Inject, Directive, ElementRef, Renderer2 } from '@angular/core';
+import { Component, Input, Inject, Directive, ElementRef, Renderer2 } from '@angular/core';
 
 @Component({
     selector: 'statchart',
@@ -11,7 +11,9 @@ export class StatchartComponent {
     constructor() {        
     }
 
-    public doughnutChartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
+    @Input()
+    Labels: string[] = ['T', 'T1'];
+
     public doughnutChartData: number[] = [350, 450, 100];
     public doughnutChartType: string = 'doughnut';
 
@@ -25,6 +27,6 @@ export class StatchartComponent {
     }
 
     setData() {
-        this.doughnutChartLabels = ['Test 1', 'Test 2', 'Test 3'];
+        this.Labels = ['Test 1', 'Test 2', 'Test 3'];
     }
 }
