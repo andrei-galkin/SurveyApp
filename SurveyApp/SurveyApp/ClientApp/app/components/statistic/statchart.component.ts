@@ -12,21 +12,10 @@ export class StatchartComponent {
     }
 
     @Input()
-    Labels: string[] = ['T', 'T1'];
+    Labels: string[];
 
-    public doughnutChartData: number[] = [350, 450, 100];
-    public doughnutChartType: string = 'doughnut';
+    @Input()
+    ChartData: number[];
 
-    // events
-    public chartClicked(e: any): void {
-        console.log(e);
-    }
-
-    public chartHovered(e: any): void {
-        console.log(e);
-    }
-
-    setData() {
-        this.Labels = ['Test 1', 'Test 2', 'Test 3'];
-    }
+    public ChartType: string = 'doughnut';
 }

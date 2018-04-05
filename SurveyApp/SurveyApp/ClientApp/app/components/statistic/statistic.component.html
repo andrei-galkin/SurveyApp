@@ -12,8 +12,6 @@
         <tr *ngFor="let question of questions">
             <td>{{ question.index }}. {{ question.text }}</td>
             <td>
-                <statchart [Labels] ="labels"></statchart>
-                <!--<tlist [items]="items"></tlist>-->
                 <table class='table' *ngIf="question.statResult">
                     <thead>
                         <tr>
@@ -28,6 +26,9 @@
                         </tr>
                     </tbody>
                 </table>
+            </td>
+            <td>
+                <statchart [Labels]="question.labels" [ChartData]="question.data"></statchart>
             </td>
         </tr>
     </tbody>
