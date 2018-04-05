@@ -37,6 +37,8 @@ namespace StatisticApp.Controllers
                     Id = i.Key,
                     Text = i.Value.Text,
                     Type = i.Value.Type,
+                    Labels = i.Value.Labels,
+                    Data = i.Value.Data,
                     StatResult = i.Value.StatResult.Select( 
                             r => new StatResultModel() {
                                 Count = r.Count,

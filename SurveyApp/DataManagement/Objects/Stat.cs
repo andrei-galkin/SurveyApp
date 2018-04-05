@@ -11,6 +11,8 @@ namespace DataManagement
     {
         public int Id { get; set; }
         public string Text { get; set; }
+        public IList<string> Labels { get; set; }
+        public IList<int> Data { get; set; }
         public int Type { get; set; }
         public IList<StatResult> StatResult { get; set; }
         

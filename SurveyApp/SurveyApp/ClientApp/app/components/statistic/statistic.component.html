@@ -1,5 +1,6 @@
 <h1>Customer Satisfaction Statistic</h1>
 <p *ngIf="!questions"><em>Loading...</em></p>
+
 <table class='table' *ngIf="questions">
     <thead>
         <tr>
@@ -25,6 +26,9 @@
                         </tr>
                     </tbody>
                 </table>
+            </td>
+            <td>
+                <statchart [Labels]="question.labels" [ChartData]="question.data"></statchart>
             </td>
         </tr>
     </tbody>

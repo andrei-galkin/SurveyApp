@@ -37,6 +37,8 @@ namespace DataManagement
                         Id = s.Id,
                         Text = s.Text,
                         Type = s.Type,
+                        Labels = new List<string> { s.Data },
+                        Data = new List<int> { s.Count },
                         StatResult = new List<StatResult>()
                         {
                             new StatResult
@@ -50,6 +52,8 @@ namespace DataManagement
                 }
                 else
                 {
+                    statList[s.Id].Labels.Add(s.Data);
+                    statList[s.Id].Data.Add(s.Count);
                     statList[s.Id].StatResult.Add(
                         new StatResult
                         {
