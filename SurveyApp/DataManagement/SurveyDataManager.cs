@@ -60,7 +60,7 @@ namespace DataManagement
                     await _surveyDataAccess.SaveAnswerAsync(answerDto).ConfigureAwait(false);
                 }
             }
-            catch(Exception ex)
+            catch (Exception)
             {
                 throw;
             }                

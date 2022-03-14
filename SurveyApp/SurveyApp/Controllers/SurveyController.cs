@@ -1,33 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using DataManagement;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using SurveyApp.Model;
 
 namespace SurveyApp.Controllers
 {
-    [Route("api/[controller]")]
-    public class SurveyDataController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class SurveyController : Controller
     {
         private readonly ISurveyDataManager<Question, ResponseItem> _surveyDataManager;
-
-        public SurveyDataController()
+        private readonly ILogger<SurveyController> _logger;
+        public SurveyController(ILogger<SurveyController> logger)
         {
-            try
-            {
-                _surveyDataManager = new SurveyDataManager();
-            }
-            catch (Exception ex)
-            {
-                string exception = ex.ToString();
-            }
+            _surveyDataManager = new SurveyDataManager(); 
+            _logger = logger;
         }
 
-        [HttpGet("[action]")]
-        public async Task<IEnumerable<QuestionModel>> GetQuestions()
+        [HttpGet]
+        public async Task<IEnumerable<QuestionModel>> Get()
         {
             try
             {
@@ -45,22 +35,22 @@ namespace SurveyApp.Controllers
             catch (Exception ex)
             {
                 string exception = ex.ToString();
+                _logger.LogError(exception);
                 return new List<QuestionModel>();
             }
         }
 
-        [Produces("application/json")]
-        [HttpPost("[action]")]
-        public async Task<IActionResult> SaveAnswer([FromBody]JObject json)
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody]Dictionary<string,string> questionnaire)
         {
             try
             {
                 var answer = new ResponseItem();
                 answer.UserData = Request.Host.Host;
 
-                foreach (KeyValuePair<string, JToken> pair in json)
+                foreach (KeyValuePair<string, string> pair in questionnaire)
                 {
-                    string value = json.GetValue(pair.Key).ToString().Trim();
+                    string value = pair.Value.ToString().Trim();
                     if (value != string.Empty)
                     {
                         answer.Responses.Add(pair.Key, value);

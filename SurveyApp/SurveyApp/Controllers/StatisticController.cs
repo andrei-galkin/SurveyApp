@@ -1,36 +1,27 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using DataManagement;
 using Microsoft.AspNetCore.Mvc;
 
 namespace StatisticApp.Controllers
 {
-    [Route("api/[controller]")]
-    public class StatisticDataController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class StatisticController : ControllerBase
     {
         private readonly IStatisticDataManager<IDictionary<int, Stat>> _statisticDataManager;
+        private readonly ILogger<StatisticController> _logger;
 
-        public StatisticDataController()
+        public StatisticController(ILogger<StatisticController> logger)
         {
-            try
-            {
-                _statisticDataManager = new StatisticDataManager();
-            }
-            catch (Exception ex)
-            {
-                string exception = ex.ToString();
-            }
+            _statisticDataManager = new StatisticDataManager();
+            _logger = logger;
         }
 
-        [HttpGet("[action]")]
-        public async Task<IEnumerable<StatModel>> GetData()
+        [HttpGet]
+        public async Task<IEnumerable<StatModel>> Get()
         {
             try
             {
                 var list = await _statisticDataManager.GetDataAsync().ConfigureAwait(false);
-
                 return list.Select((i, index)=> new StatModel()
                 {
                     Index = index + 1,
@@ -39,7 +30,7 @@ namespace StatisticApp.Controllers
                     Type = i.Value.Type,
                     Labels = i.Value.Labels,
                     Data = i.Value.Data,
-                    StatResult = i.Value.StatResult.Select( 
+                    Result = i.Value.StatResult.Select( 
                             r => new StatResultModel() {
                                 Count = r.Count,
                                 Text = r.Text
@@ -50,6 +41,7 @@ namespace StatisticApp.Controllers
             catch (Exception ex)
             {
                 string exception = ex.ToString();
+                _logger.LogError(exception);
                 return new List<StatModel>();
             }
         }

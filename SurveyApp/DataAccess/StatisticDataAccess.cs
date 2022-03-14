@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Threading.Tasks;
 using Dapper;
 
 namespace DataAccess
@@ -22,19 +19,19 @@ namespace DataAccess
 
         public async Task<IEnumerable<StatDto>> GetDataAsync()
         {
-            var list = await _db.QueryAsync<StatDto>(@"SELECT
-                                                          a.question_id as id
-                                                       ,b.text
-                                                       ,b.question_type as type
-                                                       ,a.data
-                                                          ,COUNT(a.data) as count
-                                                      FROM dbo.SurveyResponses a
-                                                      INNER JOIN dbo.SurveyQuestions b ON a.question_id = b.id
-                                                      GROUP BY question_id, data, b.text, b.question_type
-                                                      ORDER BY question_id").ConfigureAwait(false);
-            return list;
+            const string sql = @"SELECT
+                                    a.question_id as id
+                                     ,b.text
+                                     ,b.question_type as type
+                                     ,a.data
+                                        ,COUNT(a.data) as count
+                                 FROM dbo.SurveyResponses a
+                                 INNER JOIN dbo.SurveyQuestions b ON a.question_id = b.id
+                                 GROUP BY question_id, data, b.text, b.question_type
+                                 ORDER BY question_id";
 
-            //return SurveyDataMock.GetDataStats();
+            var list = await _db.QueryAsync<StatDto>(sql).ConfigureAwait(false);
+            return list;
         }
         
         public void Dispose()
