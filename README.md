@@ -7,7 +7,7 @@ Build on C#, .NET 6, Angular 13, MS SQL
 1. Open MS SQL Management Studio and create data base.
 2. Run db.sql [db.sql](../master/Database/db.sql) script to create tables for the app.
 3. Run data.sql [data.sql](../master/Databas/data.sql) to populate tables with the data for the app.
-4. Open SurveyApp.sln in VS2019.
+4. Open SurveyApp.sln in VS2022.
 5. Set connection string to the db in appsettings.json
 6. Hit F5.
 
